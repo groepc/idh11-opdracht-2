@@ -102,7 +102,7 @@ public class Server extends JFrame implements ActionListener {
     theServer.setVisible(true);
 
     //get RTSP socket port from the command line
-    int RTSPport = Integer.parseInt(argv[0]);
+    int RTSPport = Integer.parseInt("30000");
    
     //Initiate TCP connection with the client for the RTSP session
     ServerSocket listenSocket = new ServerSocket(RTSPport);
@@ -114,7 +114,7 @@ public class Server extends JFrame implements ActionListener {
 
     //Initiate RTSPstate
     state = INIT;
-
+    
     //Set input and output stream filters:
     RTSPBufferedReader = new BufferedReader(new InputStreamReader(theServer.RTSPsocket.getInputStream()) );
     RTSPBufferedWriter = new BufferedWriter(new OutputStreamWriter(theServer.RTSPsocket.getOutputStream()) );
@@ -124,6 +124,7 @@ public class Server extends JFrame implements ActionListener {
     boolean done = false;
     while(!done)
       {
+          System.out.println("New RTSP state: wachten");
 	request_type = theServer.parse_RTSP_request(); //blocking
 	
 	if (request_type == SETUP)
